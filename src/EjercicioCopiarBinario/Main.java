@@ -14,8 +14,9 @@ public class Main {
             try (InputStream ficheroIn = new FileInputStream("./" + nombreFichero);
                  OutputStream ficheroOut = new FileOutputStream("fichero-copia.dat");){
                 int datos;
-                while ((datos = ficheroIn.read()) != -1){
-                    ficheroOut.write(datos);
+                byte[] buffer = new byte[128];
+                while ((datos = ficheroIn.read(buffer)) != -1){
+                    ficheroOut.write(buffer, 0, datos);
                 }
                 fin = true;
             } catch (FileNotFoundException e){
