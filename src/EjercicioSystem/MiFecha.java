@@ -1,5 +1,4 @@
-import java.util.Calendar;
-import java.util.Date;
+package EjercicioSystem;
 
 public class MiFecha {
     private int dia;
