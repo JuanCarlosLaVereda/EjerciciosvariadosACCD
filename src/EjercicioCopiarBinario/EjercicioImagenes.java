@@ -20,6 +20,12 @@ public class EjercicioImagenes {
                     copiarImagen("png", nombre, buffer, datos, ficheroIn);
                 } else if (cabecera == 255){
                     copiarImagen("jpeg", nombre, buffer, datos, ficheroIn);
+                } else if (cabecera == 66){
+                    copiarImagen("bmp", nombre, buffer, datos, ficheroIn);
+                } else if (cabecera == 71){
+                    copiarImagen("gif", nombre, buffer, datos, ficheroIn);
+                } else if (cabecera == 82){
+                    copiarImagen("webp", nombre, buffer, datos, ficheroIn);
                 }
 
 
