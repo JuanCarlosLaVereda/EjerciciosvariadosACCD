@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
-    static void main() {
+    public static void main(String[] args) {
         boolean fin = false;
         Scanner sc = new Scanner(System.in);
         while (!fin) {
@@ -22,26 +22,24 @@ public class Main {
                 System.out.println("El tamaño de la imagen es: " + size + " bytes");
                 ficheroIn.read(buffer, 6, 12);
                 ficheroIn.read(buffer, 6, 4);
-                System.out.println(Arrays.toString(buffer));
-  /*              byte[] tamanyo = new byte[4];
-                byte[] reservado = new byte[12];
-                byte[] ancho = new byte[4];
-                byte[] alto = new byte[4];
-                byte[] reservado2 = new byte[8];
-                byte[] tamanyoImagen =  new byte[4];*/
-/*                ficheroIn.read(tipo);
-                ficheroIn.read(tamanyo, 0, tamanyo.length);
-                ficheroIn.read(reservado, 0, reservado.length);
-                ficheroIn.read(ancho, 0, ancho.length);
-                ficheroIn.read(alto, 0, alto.length);
-                ficheroIn.read(reservado2, 0, reservado2.length);
-                ficheroIn.read(tamanyoImagen, 0, tamanyoImagen.length);*/
-
-/*                System.out.println(Arrays.toString(ancho));
-                System.out.println(Arrays.toString(alto));
-                System.out.println(Arrays.toString(tamanyoImagen));*/
-
-
+                int anchura = (buffer[6] & 0x0FF) | ((buffer[7] & 0x0FF) << 8) | ((buffer[8] & 0x0FF) << 16) | ((buffer[9] & 0x0FF) << 24);
+                System.out.println("La anchura de la imagen es: " + anchura);
+                ficheroIn.read(buffer, 10, 4);
+                int altura = (buffer[10] & 0x0FF) | ((buffer[11] & 0x0FF) << 8) | ((buffer[12] & 0x0FF) << 16) | ((buffer[13] & 0x0FF) << 24);
+                System.out.println("La altura de la imagen es: " + altura);
+                ficheroIn.read(buffer, 14, 4);
+                ficheroIn.read(buffer, 14, 4);
+                int compresion = (buffer[14] & 0x0FF) | ((buffer[15] & 0x0FF) << 8) | ((buffer[16] & 0x0FF) << 16) | ((buffer[17] & 0x0FF) << 24);
+                switch (compresion) {
+                    case 0 -> System.out.println("Sin compresión (BI_RGB)");
+                    case 1 -> System.out.println("Compresión RLE 8 bits (BI_RLE8)");
+                    case 2 -> System.out.println("Compresión RLE 4 bits (BI_RLE4)");
+                    case 3 -> System.out.println("Máscara de bits (BI_BITFIELDS)");
+                    case 4 -> System.out.println("JPEG (BI_JPEG)");
+                    case 5 -> System.out.println("PNG (BI_PNG)");
+                    default -> System.out.println("Tipo de compresión desconocido");
+                }
+                fin =  true;
 
             } catch (FileNotFoundException e) {
                 System.out.println("Archivo no encontrado");
