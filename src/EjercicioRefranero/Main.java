@@ -57,8 +57,6 @@ public class Main {
         LocalDate fechaActual =  LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         String nombre =  formatter.format(fechaActual);
-/*        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd");
-        String hoy = formatter2.format(fechaActual);*/
         File carpeta = new File("./" + palabra);
         File[] archivos =  carpeta.listFiles();
         boolean sobreescribir = true;
