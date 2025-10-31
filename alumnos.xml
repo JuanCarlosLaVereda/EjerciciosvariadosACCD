@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<clase>
+    <modulo>Acceso a Datos</modulo>
+    <alumnos>
+        <alumno id="1">
+            <nombre>Ana</nombre>
+            <nota>8.5</nota>
+        </alumno>
+        <alumno id="2">
+            <nombre>Luis</nombre>
+            <nota>9.0</nota>
+        </alumno>
+        <alumno id="3">
+            <nombre>Carlos</nombre>
+            <nota>7.2</nota>
+        </alumno>
+        <alumno id="4">
+            <nombre>María</nombre>
+            <nota>9.5</nota>
+        </alumno>
+        <alumno id="5">
+            <nombre>Javier</nombre>
+            <nota>6.8</nota>
+        </alumno>
+        <alumno id="6">
+            <nombre>Laura</nombre>
+            <nota>8.1</nota>
+        </alumno>
+        <alumno id="7">
+            <nombre>David</nombre>
+            <nota>5.5</nota>
+        </alumno>
+        <alumno id="8">
+            <nombre>Sofía</nombre>
+            <nota>9.7</nota>
+        </alumno>
+        <alumno id="9">
+            <nombre>Pablo</nombre>
+            <nota>6.0</nota>
+        </alumno>
+        <alumno id="10">
+            <nombre>Elena</nombre>
+            <nota>7.9</nota>
+        </alumno>
+        <alumno id="11">
+            <nombre>Daniel</nombre>
+            <nota>8.3</nota>
+        </alumno>
+        <alumno id="12">
+            <nombre>Carmen</nombre>
+            <nota>5.1</nota>
+        </alumno>
+        <alumno id="13">
+            <nombre>Sergio</nombre>
+            <nota>7.7</nota>
+        </alumno>
+        <alumno id="14">
+            <nombre>Paula</nombre>
+            <nota>9.2</nota>
+        </alumno>
+        <alumno id="15">
+            <nombre>Miguel</nombre>
+            <nota>5.1</nota>
+        </alumno>
+        <alumno id="16">
+            <nombre>Miguel</nombre>
+            <nota>6.4</nota>
+        </alumno>
+        <alumno id="17">
+            <nombre>Lucía</nombre>
+            <nota>8.8</nota>
+        </alumno>
+        <alumno id="18">
+            <nombre>Isabel</nombre>
+            <nota>9.9</nota>
+        </alumno>
+        <alumno id="19">
+            <nombre>Jorge</nombre>
+            <nota>5.9</nota>
+        </alumno>
+        <alumno id="20">
+            <nombre>Marta</nombre>
+            <nota>8.0</nota>
+        </alumno>
+    </alumnos>
+</clase>
