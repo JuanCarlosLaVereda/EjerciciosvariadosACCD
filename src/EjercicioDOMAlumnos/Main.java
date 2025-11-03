@@ -9,6 +9,12 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
 
@@ -26,12 +32,12 @@ public class Main {
             eliminarAlumnos("Miguel", nodelist);
             mostrarAlumnos(nodelist, doc);
 
-/*            // clases necesarias finalizar la creación del archivo XML
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File("ejercicio3.xml"));*/
+            StreamResult result = new StreamResult(new File("./alumnos.xml"));
 
+            transformer.transform(source, result);
 
 
         } catch (ParserConfigurationException e) {
@@ -43,12 +49,16 @@ public class Main {
         } catch (SAXException e) {
             System.err.println("Error al leer el archivo.");
             e.printStackTrace();
+        } catch (TransformerConfigurationException e) {
+            throw new RuntimeException(e);
+        } catch (TransformerException e) {
+            throw new RuntimeException(e);
         }
 
     }
 
     public static void eliminarAlumnos(String nombre, NodeList nodelist) {
-        for (int i = 0; i < nodelist.getLength(); i++) {
+        for (int i = nodelist.getLength()-1; i >= 0; i--) {
             Node node = nodelist.item(i);
 
             if (node.getNodeType() == Node.ELEMENT_NODE) {
