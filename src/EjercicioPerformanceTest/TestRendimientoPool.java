@@ -17,43 +17,27 @@ public class TestRendimientoPool {
 
     static void main() {
         //Metodo 1
-        testConDriverManager();
-        System.out.println("Metodo 2");
+        System.out.println("Metodo 1");
         long tiempo = testConDriverManager();
         System.out.println("Tiempo de ejecucion: " + tiempo + "ms");
 
 
 
-/*        //Metodo 2
+        //Metodo 2
 
-        HikariConfig config = new HikariConfig();
-        config.setJdbcUrl(DB_URL);
-        config.setUsername(DB_USER);
-        config.setPassword(DB_PASSWORD);
-        config.setMaximumPoolSize(20);
-        config.setMinimumIdle(5);
-        config.setConnectionTimeout(30000); //30 segundos
-
-
-        try (HikariDataSource ds = new HikariDataSource(config);){
-            System.out.println("Metodo 2");
-            tiempo = testConDataSource(ds);
-            System.out.println("Tiempo de ejecucion: " + tiempo + "ms");
-        }*/
+        System.out.println("Metodo 2");
+        tiempo = testConDataSource();
+        System.out.println("Tiempo de ejecucion: " + tiempo + "ms");
 
     }
 
     public static long testConDriverManager(){
         long tiempo_inicio = System.nanoTime();
+        System.out.println("Ejecutando...");
         for(int i = 0; i < NUM_PETICIONES; i++){
             try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             PreparedStatement ps =  con.prepareStatement(CONSULTA);
             ResultSet rs = ps.executeQuery();){
-
-                if(rs.next()){
-                    System.out.println(rs.getString(1));
-                }
-
 
             } catch (SQLException e) {
                 System.err.println("Error al conectar con la base de datos");
@@ -64,26 +48,34 @@ public class TestRendimientoPool {
         return ((tiempo_final - tiempo_inicio) / 1_000_000);
 
     }
-    public static long testConDataSource(HikariDataSource ds) {
-        System.out.println("Pool creado");
+    public static long testConDataSource() {
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl(DB_URL);
+        config.setUsername(DB_USER);
+        config.setPassword(DB_PASSWORD);
+        config.setMaximumPoolSize(20);
+        config.setMinimumIdle(5);
+        config.setConnectionTimeout(30000); //30 segundos
         long tiempo_inicio = System.nanoTime();
-        for (int i = 1; i <= NUM_PETICIONES; i++) {
-            try (Connection connection = ds.getConnection();){
+        try(HikariDataSource ds = new HikariDataSource(config);){
+            System.out.println("Ejecutando...");
+            for (int i = 1; i <= NUM_PETICIONES; i++) {
+                try (Connection connection = ds.getConnection();){
 
-                try (PreparedStatement ps =  connection.prepareStatement(CONSULTA);
-                     ResultSet rs = ps.executeQuery()) {
+                    try (PreparedStatement ps =  connection.prepareStatement(CONSULTA);
+                         ResultSet rs = ps.executeQuery()) {
 
-                    if (rs.next()) {
-                        System.out.println(rs.getString(1));
                     }
+
+
+                } catch (SQLException e) {
+                    System.err.println("Error al conectar con la base de datos");
+                    e.printStackTrace();
                 }
-
-
-            } catch (SQLException e) {
-                System.err.println("Error al conectar con la base de datos");
-                e.printStackTrace();
             }
+
         }
+
         long tiempo_final = System.nanoTime();
         return ((tiempo_final - tiempo_inicio) / 1_000_000);
     }
